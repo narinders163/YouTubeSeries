@@ -1,0 +1,7 @@
+com\pages\DashBoard.class
+com\qa\factory\DriverFactory.class
+com\qa\utils\ElemUtils.class
+com\pages\ForgotPassword.class
+com\pages\MyInfoPage.class
+com\pages\LoginPage.class
+com\qa\utils\ConfigReader.class

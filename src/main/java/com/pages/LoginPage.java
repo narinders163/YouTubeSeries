@@ -1,47 +1,41 @@
 package com.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+
+public class LoginPage{
 	
 	private WebDriver driver;
 	public LoginPage(WebDriver dr)
 	{
 		this.driver=dr;
-		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(css="input[name = 'username']")
-	private WebElement username;
-	
-	@FindBy(css="input[name = 'password']")
-	private WebElement password;
-	
-	@FindBy(css="button[type='submit']")
-	private WebElement logInbutton;
-	
-	@FindBy(xpath="//p[text()='Invalid credentials']")
-	private WebElement errorinlogin;
-	
-	@FindBy(xpath="//p[text()='Forgot your password? ']")
-	private WebElement forgotpassword;
+
+	private By username = By.cssSelector("input[name = 'username']");
+
+	private By password = By.cssSelector("input[name = 'password']");
+
+	private By logInbutton = By.cssSelector("button[type='submit']");
+
+	private By errorinlogin = By.xpath("//p[text()='Invalid credentials']");
+
+	private By forgotpassword = By.xpath("//p[text()='Forgot your password? ']");
 	
 	public void enterusername(String user)
 	{
-		username.clear();
-		username.sendKeys(user);
+		driver.findElement(username).clear();
+		driver.findElement(username).sendKeys(user);
 	}
 	public void enterpassword(String pass)
 	{
-		password.clear();
-		password.sendKeys(pass);
+		driver.findElement(password).clear();
+		driver.findElement(password).sendKeys(pass);
 	}
-	public void clicklogin()
+	public DashBoard clicklogin()
 	{
-		logInbutton.click();
+		driver.findElement(logInbutton).click();
+		return new DashBoard(driver);
 	}
 	public DashBoard LoginToApp(String user , String pass)
 	{
@@ -55,7 +49,7 @@ public class LoginPage {
 		boolean b = false;
 		try
 		{
-			b = errorinlogin.isDisplayed();
+			b = driver.findElement(errorinlogin).isDisplayed();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -65,12 +59,13 @@ public class LoginPage {
 	}
 	public String geterrortext()
 	{
-		String a = errorinlogin.getText();
+		String a = driver.findElement(errorinlogin).getText();
 		return a;
 	}
-	public void clickonforgotpassword()
+	public ForgotPassword clickonforgotpassword()
 	{
-		forgotpassword.click();
+		driver.findElement(forgotpassword).click();
+		return new ForgotPassword(driver);
 	}
 
 }

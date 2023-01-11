@@ -1,9 +1,7 @@
 package com.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ForgotPassword {
 	
@@ -11,18 +9,16 @@ public class ForgotPassword {
 	public ForgotPassword(WebDriver dr)
 	{
 		this.driver=dr;
-		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(xpath="//h6[text()='Reset Password']")
-	private WebElement resettext;
+
+	private By resettext = By.xpath("//h6[text()='Reset Password']");
 	
 	public boolean isresettextdisplayed()
 	{
 		boolean b = false;
 		try
 		{
-			b = resettext.isDisplayed();
+			b = driver.findElement(resettext).isDisplayed();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
