@@ -1,15 +1,16 @@
 package AppHooks;
 
-import java.io.IOException;
-import java.util.Properties;
-
-import org.openqa.selenium.WebDriver;
-
 import com.qa.factory.DriverFactory;
 import com.qa.utils.ConfigReader;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
+import java.util.Properties;
 
 public class ApplicationHooks {
 	
@@ -36,8 +37,20 @@ public class ApplicationHooks {
 	@After(order=1)
 	public void quitBrowser()
 	{
-		dr.quit();
+		dr.close();
 	}
+	@After(order=2)
+	public void screenshot(Scenario scenario)
+	{
+		if(scenario.isFailed())
+		{
+			TakesScreenshot takesScreenshot = ((TakesScreenshot)dr);
+			byte[] b = takesScreenshot.getScreenshotAs(OutputType.BYTES);
+			String name = scenario.getName().replace(" ", "_");
+			scenario.attach(b , "image/png" , "name");
+		}
+	}
+
 	
 
 }

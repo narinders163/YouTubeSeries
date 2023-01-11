@@ -1,12 +1,11 @@
 package com.pages;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashBoard {
 	
@@ -14,42 +13,80 @@ public class DashBoard {
 	public DashBoard(WebDriver dr)
 	{
 		this.driver=dr;
-		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(css="p.oxd-userdropdown-name")
-	private WebElement dropdown;
-	
-	@FindBy(xpath="//a[text()='Logout']")
-	private WebElement logout;
-	
-	@FindBy(xpath="//h6[text()='Dashboard']")
-	private WebElement dashboardelement;
-	
-	@FindBy(xpath="//div[@class='orangehrm-quick-launch-heading']")
-	private List<WebElement> QuickLaunge = new ArrayList<WebElement>();
-	
-	public List<String> QuickLaungeNames()
+
+	private By dropdown = By.cssSelector("p.oxd-userdropdown-name");
+
+	private By logout = By.xpath("//a[text()='Logout']");
+	private By MyInfo = By.xpath("//span[text()='My Info']");
+
+	private By dashboardelement = By.xpath("//h6[text()='Dashboard']");
+
+	/*private By AssignLeave = By.xpath("//div[@title='Assign Leave']");
+	private By LeaveList = By.xpath("//div[@title='Leave List']");
+	private By Timesheets = By.xpath("//div[@title='Timesheets']");
+	private By ApplyLeave = By.xpath("//div[@title='Apply Leave']");
+	private By MyLeave = By.xpath("//div[@title='My Leave']");
+	private By MyTimesheet = By.xpath("//div[@title='My Timesheet']");
+
+	private List<WebElement> list = new ArrayList<WebElement>();
+
+
+	public List<WebElement> QuickLaungeElements()
 	{
-		List<String> tmp = new ArrayList<String>();
-		for(WebElement ele:QuickLaunge)
+		list.add(driver.findElement(AssignLeave));
+		list.add(driver.findElement(LeaveList));
+		list.add(driver.findElement(Timesheets));
+		list.add(driver.findElement(ApplyLeave));
+		list.add(driver.findElement(MyLeave));
+		list.add(driver.findElement(MyTimesheet));
+		return list;
+
+
+	}
+
+
+
+
+	public List<String> GetElementsNames() {
+		List<String> nameslist = new ArrayList<String>();
+		for(WebElement ele : QuickLaungeElements())
 		{
-			tmp.add(ele.getText().trim());
+			nameslist.add(ele.getText().trim());
 		}
-		return tmp;
-	}
-	
-	public int itemscount()
+		return nameslist;
+
+	}*/
+
+	public void clickOnMyInfo()
 	{
-		int i = QuickLaunge.size();
-		return i;
+		driver.findElement(MyInfo).click();
+
 	}
-	
+
+	private By QuickLaunge = By.cssSelector("div.orangehrm-quick-launch-heading");
+
+	public int getQuickLaungeCount()
+	{
+		return driver.findElements(QuickLaunge).size();
+	}
+
+	public List<String> getQuickLaungeItemsNames()
+	{
+		List<WebElement> list = driver.findElements(QuickLaunge);
+		List<String> names = new ArrayList<String>();
+		for(WebElement ele:list)
+		{
+			names.add(ele.getText().trim());
+		}
+		return names;
+	}
+
 	public void loggingout() throws InterruptedException
 	{
-		dropdown.click();
+		driver.findElement(dropdown).click();
 		Thread.sleep(1000);
-		logout.click();
+		driver.findElement(logout).click();
 	}
 	
 	public boolean isdashdisplayed()
@@ -57,7 +94,7 @@ public class DashBoard {
 		boolean b = false;
 		try
 		{
-			b = dashboardelement.isDisplayed();
+			b = driver.findElement(dashboardelement).isDisplayed();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -65,6 +102,7 @@ public class DashBoard {
 		return b;
 		
 	}
+
 	
 	
 	

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="2" time="64.632">
+    <testcase classname="dashboard page info and items" name="verify items count" time="33.398">
+        <system-out><![CDATA[Given the user is on the login page.........................................passed
+When user enters the "Admin" and "admin123".................................passed
+And user clicks on the Submit button........................................passed
+Given dashboard page is visible.............................................passed
+Then verify the QuickLaunge items count.....................................passed
+]]></system-out>
+    </testcase>
+    <testcase classname="dashboard page info and items" name="verify items text" time="30.988">
+        <system-out><![CDATA[Given the user is on the login page.........................................passed
+When user enters the "Admin" and "admin123".................................passed
+And user clicks on the Submit button........................................passed
+Given dashboard page is visible.............................................passed
+Then verify the QuickLanuge items names.....................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,6 @@
+stepdefinition\MyInfoDefinition.class
+stepdefinition\ForgotPasswordDefinition.class
+AppHooks\ApplicationHooks.class
+testrunners\RunLoginTest.class
+stepdefinition\DashBoardDefinition.class
+stepdefinition\LoginTestDefinition.class

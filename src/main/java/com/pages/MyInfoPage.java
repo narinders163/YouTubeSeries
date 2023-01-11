@@ -1,44 +1,37 @@
 package com.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-public class MyInfoPage {
+public class MyInfoPage{
 	private WebDriver driver;
 	public MyInfoPage(WebDriver dr)
 	{
 		this.driver=dr;
-		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(xpath="//span[text()='My Info']")
-	private WebElement MyInfo;
-	
-	public void clickOnMyInfo()
+
+	private By SideMenuItems = By.cssSelector("div.orangehrm-tabs-wrapper");
+
+	public int getSideMenuItemsCount()
 	{
-		MyInfo.click();
+		return driver.findElements(SideMenuItems).size();
 	}
-	
-	@FindBy(css="div.orangehrm-tabs-wrapper")
-	private List<WebElement> SideMenuItems;
-	
-	public List<String> SideMenuItemsNames()
+
+
+	public List<String> getSideMenuItemsNames()
 	{
-		List<String> tmp = new ArrayList<String>();
-		for(WebElement ele:SideMenuItems)
+		List<WebElement> list = driver.findElements(SideMenuItems);
+		List<String> names = new ArrayList<String>();
+		for(WebElement ele:list)
 		{
-			tmp.add(ele.getText().trim());
+			names.add(ele.getText().trim());
 		}
-		return tmp;
+		return names;
 	}
-	public int SideMenuItemsCount()
-	{
-		return SideMenuItems.size();
-	}
+
 
 }

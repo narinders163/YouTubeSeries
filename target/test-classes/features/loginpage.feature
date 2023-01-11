@@ -16,11 +16,19 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-
+@All
 Feature: Login page
 
+  Background:
+    Given the user is on the login page
+@Success
 Scenario: Successfully Login
-Given the user is on the login page
-When user enters the "Admin" and "admin123"
-And user clicks on the Submit button
-Then user should be able to login
+  When user enters the "Admin" and "Admin123"
+  And user clicks on the Submit button
+  Then user should be able to login
+
+@Unsuccess
+  Scenario: Login Unsuccessful
+    When user enters the "Admin1" and "Admin123"
+    And the user is on the login page
+    Then user should not be able to login
